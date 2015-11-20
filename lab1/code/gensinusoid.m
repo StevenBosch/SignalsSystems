@@ -1,5 +1,5 @@
 function [ans] = gensinusoid(A,f,phi,t1,t2,Fs)
-	# The sinusoid function is: y(n)=Asin(2π f n+phi)
+	# The sinusoid function is: y(n)=Asin(2π f t+phi)
 	totalTime = t2-t1
 	nSamples = totalTime * Fs
 	ans = zeros(1, nSamples)
