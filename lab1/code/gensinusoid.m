@@ -13,4 +13,3 @@ function [ans] = gensinusoid(A,f,phi,t1,t2,Fs)
 		t = t1 + (i-1)*1/Fs
 		ans(i) = A * cos (2*pi  *f*t + phi)
 	endfor
-end
