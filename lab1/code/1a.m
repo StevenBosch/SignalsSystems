@@ -3,4 +3,5 @@ plot(ans(1:200))
 xlabel("Sample")
 ylabel("Amplitude (A)")
 title ("The first 200 samples of the signal x1(t) = 5 cos(800\pi t)")
+legend ("x1(t) + x2(t)");
 print -deps ../report/plot1A.eps

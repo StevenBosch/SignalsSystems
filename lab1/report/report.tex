@@ -8,6 +8,7 @@
 \usepackage{subcaption}
 \usepackage{amsmath}
 \usepackage{hyperref}
+\usepackage{epstopdf}
 
 %\renewcommand{\thesubsection}{\arabic{subsection}}
 \renewcommand{\thesubsubsection}{\alph{subsubsection}}
@@ -31,6 +32,7 @@ showstringspaces=false
 
 \section{Summing Sinusoids}
 \subsection{a}
+\includegraphics[width=\columnwidth]{plot1A.eps}
 \subsection{b}
 \subsection{c}
 \subsection{d}
@@ -40,8 +42,19 @@ Now we got the following formulas:
     x1(t) = 5 cos(800\pi t)
 \end{equation}
 \begin{equation}
-    x2(t) = 5 cos(800\pi t + 10.5\pi)
+    x2(t) = 5 cos(800\pi t + 10.5\:pi)
 \end{equation}
+Now we can generate x1(t)+x2(t) by using our created function gensinusoid.\\
+\includegraphics[width=\columnwidth]{plot4A.eps}\\
+Using the sumsinusoid function we can calculate the values for y(t):
+$[A, f, phi] = 7.07107,400.00000,0.78540$, giving us\
+\begin{equation}
+    y(t) = 7.07107 cos(400*2*\pi t + 0.78540)
+\end{equation}
+The plot with both lines shows a perfect overlap,
+so we can conclude that our answer for y(t) is correct.
+\includegraphics[width=\columnwidth]{plot4B.eps}
+
 
 
 \newpage
