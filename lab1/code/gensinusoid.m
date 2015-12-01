@@ -6,10 +6,10 @@ function [ans] = gensinusoid(A,f,phi,t1,t2,Fs)
     # t1 and t2: start and end time of the sampled wave (in s.)
     # Fs: sample rate, i.e. number of samples per second
 
-	totalTime = t2-t1
-	nSamples = totalTime * Fs
-	ans = zeros(1, nSamples)
+	totalTime = t2-t1;
+	nSamples = totalTime * Fs;
+	ans = zeros(1, nSamples);
 	for i = 1:nSamples
-		t = t1 + (i-1)*1/Fs
-		ans(i) = A * cos (2*pi  *f*t + phi)
+		t = t1 + (i-1)*1/Fs;
+		ans(i) = A * cos (2*pi  *f*t + phi);
 	endfor
