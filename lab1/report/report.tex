@@ -145,6 +145,15 @@ This is indeed what figure \ref{fig1e3} shows.
 \subsection{}
 For our code, see \autoref{code:2a}
 
+\subsection{}
+Two microphones at different locations can receive the signals coming from both of the sound sources in different phases. These phase differences cause the summed signal that the 
+microphone sends through to be different. This is explained by the fact that the values of the signals change over the course of one period, so if you shift one of the signals by a part of 
+one period, their summed signal will be different. For example,
+if we would sum two signals at a time in their oscillation when their value is both positive, they would amplify each other. Now if we would change the phase of one of the signals 
+by half an oscillation, this signal would be negative and the summed signal would be lower. In conclusion, the location of the microphones influences the perceived signals.
+The following example shows this numerically (see also \autoref{code:2b} for the script we used).
+
+
 \begin{appendices}
 \section{Code}
 \lstinputlisting[caption={gensinusoid},label={code:gensinusoid}]{../code/gensinusoid.m}
