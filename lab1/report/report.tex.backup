@@ -22,6 +22,7 @@
 \usepackage{hyperref}
 \usepackage{blindtext}
 \usepackage[titletoc,title]{appendix}
+\usepackage{float}
 \definecolor{codegreen}{rgb}{0,0.6,0}
 \definecolor{codegray}{rgb}{0.5,0.5,0.5}
 \definecolor{codepurple}{rgb}{0.58,0,0.82}
@@ -58,7 +59,7 @@
 
 \section{Summing Sinusoids}
 \subsection{}
-Our implementation of the function gensinusoid is given in \ref{code:gensinusoid} of the appendix.
+Our implementation of the function gensinusoid is given in \ref{code:gensinusoid} of the appendix.\footnote{We did all of our coding in Octave instead of Matlab.}
 
 \subsection{}
 Using the function given in the previous section we get the graph given in figure \ref{fig1b}.
@@ -89,8 +90,7 @@ We can generate x1(t)+x2(t) by plotting the sum of the separate generated functi
   \caption{The first 200 samples of the signal x1(t) and x2(t) added.}
   \label{fig2d1}
 \end{figure}
-\\
-Using the sumsinusoid function we can calculate the values for y(t):\\
+Using the sumsinusoid function we can calculate the values for y(t):
 $[A, f, phi] = 7.07107,400.00000,0.78540$, giving us:
 \begin{equation}
     y(t) = 7.07107 cos(400*2*\pi t + 0.78540)
@@ -149,13 +149,46 @@ For our code, see \autoref{code:2a}
 Two microphones at different locations can receive the signals coming from both of the sound sources in different phases. These phase differences cause the summed signal that the 
 microphone sends through to be different. This is explained by the fact that the values of the signals change over the course of one period, so if you shift one of the signals by a part of 
 one period, their summed signal will be different. For example,
-if we would sum two signals at a time in their oscillation when their value is both positive, they would amplify each other. Now if we would change the phase of one of the signals 
-by half an oscillation, this signal would be negative and the summed signal would be lower. In conclusion, the location of the microphones influences the perceived signals.
-The following example shows this numerically (see also \autoref{code:2b} for the script we used).
+if we would sum two signals at a time in their oscillation when their value is at a maximum, they would amplify each other (in-phase). Now if we would change the phase of one of the signals 
+by half an oscillation, this signal would be at its minimum and the summed signal would be lower (anti-phase). In conclusion, since the location of the microphones determines the relative phase of the received signals,
+it also determines the final sum of the received signals.
+We used the script we wrote in (a) to create a numerical example, given in answer (c), that shows this phenomenon for the extreme case that two signals double each other for one microphone (in-phase),
+while they cancel each other out for the second microphone (anti-phase) (see also \autoref{code:2bc}.
 
 \subsection{}
+See \autoref{code:2bc} for the script we wrote, containing the constellation we designed. \autoref{fig2bc} shows the resulting signals of this constellation.
 
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.7\columnwidth]{plot2B.png}\\
+  \caption{Three signals: (1) the source signal (the same for both sources), (2) the signals in phase and (3) the signals in anti-phase.}
+  \label{fig2bc}
+\end{figure}
 
+\subsection{}
+We calculate the phase of the perceived signals according to the following method:
+\begin{align}
+ \lambda = v_{sound} / f \\
+ \phi = (s \% \lambda) * 2\pi
+\end{align}
+In which $\lambda$ is the wavelength, $v_{sound}$ is the velocity of sound, f is the frequency, s is the distance between the 
+microphone and the sound source and $\phi$ is the phase.
+Using these calculation, we get the following perceived signals for the three microphones:
+\begin{itemize}
+ \item Microphone 1 (0,0): $x(t) = 5cos(800 \pi t)$.
+ \item Microphone 2 (50,0): $x(t) \approx 5cos(800 \pi t + 1.39)$.
+ \item Microphone 3 (100,0): $x(t) \approx 5cos(800 \pi t + 2.78)$.
+\end{itemize}
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.7\columnwidth]{plot2D.png}\\
+  \caption{The signal $x(t) = 5cos(800 \pi t + \phi)$ received by microphones at locations (0,0), (50,0) and (100,0) ($f_s = 8000$).}
+  \label{fig2d}
+\end{figure}
+
+\subsection{}
+\autoref{code:2e} gives our implementation of requested function. 
 
 \begin{appendices}
 \section{Code}
@@ -163,5 +196,6 @@ The following example shows this numerically (see also \autoref{code:2b} for the
 \lstinputlisting[caption={sumsinusoid},label={code:simsinusoid}]{../code/sumsinusoid.m}
 \lstinputlisting[caption={1d},label={code:1d}]{../code/1d.m}
 \lstinputlisting[caption={code2a},label={code:2a}]{../code/micfunction.m}
+\lstinputlisting[caption={code2b/c},label={code:2bc}]{../code/2b.m}
 \end{appendices}
 \end{document}

@@ -160,10 +160,39 @@ See \autoref{code:2bc} for the script we wrote, containing the constellation we 
 
 \begin{figure}[H]
   \centering
-  \includegraphics[width=0.7\columnwidth]{plot2B.eps}\\
+  \includegraphics[width=0.7\columnwidth]{plot2B.png}\\
   \caption{Three signals: (1) the source signal (the same for both sources), (2) the signals in phase and (3) the signals in anti-phase.}
   \label{fig2bc}
 \end{figure}
+
+\subsection{}
+We calculate the phase of the perceived signals according to the following method:
+\begin{align}
+ \lambda = v_{sound} / f \\
+ \phi = (s \% \lambda) * 2\pi
+\end{align}
+In which $\lambda$ is the wavelength, $v_{sound}$ is the velocity of sound, f is the frequency, s is the distance between the 
+microphone and the sound source and $\phi$ is the phase.
+Using these calculation, we get the following perceived signals for the three microphones:
+\begin{itemize}
+ \item Microphone 1 (0,0): $x(t) = 5cos(800 \pi t)$.
+ \item Microphone 2 (50,0): $x(t) \approx 5cos(800 \pi t + 1.39)$.
+ \item Microphone 3 (100,0): $x(t) \approx 5cos(800 \pi t + 2.78)$.
+\end{itemize}
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.7\columnwidth]{plot2D.png}\\
+  \caption{The signal $x(t) = 5cos(800 \pi t + \phi)$ received by microphones at locations (0,0), (50,0) and (100,0) ($f_s = 8000$).}
+  \label{fig2d}
+\end{figure}
+
+\subsection{}
+\autoref{code:2e} gives our implementation of requested function. Given two signals the function shifts one of the two signals
+for the range of the highest wavelength of the two signals, with a step size of $1/f_s$. For every such phase we calculate the
+delta as the sum squared error over the least common multiple of the two frequencies of the signals, as the delta function.
+We use the least common multiple of the two frequencies, because after that amount of oscillations by the signal with the smallest
+wavelength, the two signals reach the same point again. Finally this delta gives the phase 
 
 \begin{appendices}
 \section{Code}
