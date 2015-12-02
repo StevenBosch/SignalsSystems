@@ -151,8 +151,18 @@ microphone sends through to be different. This is explained by the fact that the
 one period, their summed signal will be different. For example,
 if we would sum two signals at a time in their oscillation when their value is both positive, they would amplify each other. Now if we would change the phase of one of the signals 
 by half an oscillation, this signal would be negative and the summed signal would be lower. In conclusion, the location of the microphones influences the perceived signals.
-The following example shows this numerically (see also \autoref{code:2b} for the script we used).
+We used the script we wrote in (a) to create a numerical example, given in answer (c), that shows this phenomenon for the extreme case that two signals double each other for one microphone,
+while they cancel each other out for the second microphone (see also \autoref{code:2bc}.
 
+\subsection{}
+See \autoref{code:2bc} for the script we wrote. \autoref{fig2bc}
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.7\columnwidth]{plot2B.eps}\\
+  \caption{}
+  \label{fig2bc}
+\end{figure}
 
 \begin{appendices}
 \section{Code}
@@ -160,5 +170,6 @@ The following example shows this numerically (see also \autoref{code:2b} for the
 \lstinputlisting[caption={sumsinusoid},label={code:simsinusoid}]{../code/sumsinusoid.m}
 \lstinputlisting[caption={1d},label={code:1d}]{../code/1d.m}
 \lstinputlisting[caption={code2a},label={code:2a}]{../code/micfunction.m}
+\lstinputlisting[caption={code2b/c},label={code:2bc}]{../code/2b.m}
 \end{appendices}
 \end{document}
