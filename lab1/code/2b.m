@@ -1,7 +1,7 @@
 ## Prevent Octave from thinking that this
 # is a function file:
-
 1;
+
 # Place both sound sources 1.5 wavelength apart from each other.
 # First first place the microphone at 0.75 wavelength from both sound sources, resulting in amplification of the signal
 # Second place the microphone at 1 wavelength from the first cource and 0.5 wavelength from the other, resulting in them canceling each other out

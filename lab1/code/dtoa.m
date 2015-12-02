@@ -21,7 +21,7 @@ function loc = dtoa(dmic, delay12, delay23)
   beta2  = sqrt((dmic/2)^2 - alpha2^2);
 
   % solve x, use a,b,c-formula;
-  a = (beta1/alpha1)^2 - (beta2/alpha2)^2
+  a = (beta1/alpha1)^2 - (beta2/alpha2)^2;
   b = 2*dmic*(beta2/alpha2)^2;
   c = beta2^2 - beta1^2 - (dmic*beta2/alpha2)^2;
   dsq = sqrt(b*b - 4*a*c);

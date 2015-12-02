@@ -172,18 +172,18 @@ We calculate the phase of the perceived signals according to the following metho
  \phi = (s \% \lambda) * 2\pi
 \end{align}
 In which $\lambda$ is the wavelength, $v_{sound}$ is the velocity of sound, f is the frequency, s is the distance between the 
-microphone and the sound source and $\phi$ is the phase.
-Using these calculation, we get the following perceived signals for the three microphones:
+microphone and the sound source and $\phi$ is the phase. We use Pythagoras to determine the distance between the microphone
+and the sound source. Using these calculation, we get the following perceived signals for the three microphones:
 \begin{itemize}
- \item Microphone 1 (0,0): $x(t) = 5cos(800 \pi t)$.
- \item Microphone 2 (50,0): $x(t) \approx 5cos(800 \pi t - 1.39)$.
- \item Microphone 3 (100,0): $x(t) \approx 5cos(800 \pi t - 2.78)$.
+ \item Microphone 1 (0,0): $x(t) \approx 5cos(800 \pi t - 2.78)$.
+ \item Microphone 2 (50,0): $x(t) \approx 5cos(800 \pi t - 1.45)$.
+ \item Microphone 3 (100,0): $x(t) \approx 5cos(800 \pi t - 4.20)$.
 \end{itemize}
 Figure \ref{fig2d} shows these functions plotted, created using the micfunction, given in appendix \autoref{code:2a}.
 \begin{figure}[H]
   \centering
   \includegraphics[width=0.7\columnwidth]{plot2D.png}\\
-  \caption{The signal $x(t) = 5cos(800 \pi t + \phi)$ received by microphones at locations (0,0), (50,0) and (100,0) ($f_s = 8000$).}
+  \caption{The signal $x(t) = 5cos(800 \pi t + \phi)$ at location (0,100) received by microphones at locations (0,0), (50,0) and (100,0) ($f_s = 8000$).}
   \label{fig2d}
 \end{figure}
 
@@ -194,20 +194,28 @@ We use the least common multiple of the two frequencies, because after that amou
 wavelength, the two signals reach the same point again. Finally we have the shift (the amount of shifted samples) that yields us the lowest sum squared error and
 from this we can calculate the phase shift that yields this least sum squared error.
 
-Using this function for the signals in (d) ($x1(t) = 5cos(800 \pi t)$, $x2(t) \approx 5cos(800 \pi t + 1.39)$ and $x(t) \approx 5cos(800 \pi t + 2.78)$)
+Using this function for the signals in (d) ($x1(t) = 5cos(800 \pi t - 2.78)$, $x2(t) \approx 5cos(800 \pi t + 1.45)$ and $x(t) \approx 5cos(800 \pi t + 4.20)$)
 we get the following resulting phase shifts:
 \begin{itemize}
- \item x1 and x2, gives us $\phi \approx 1.26$.
- \item x1 and x3, gives us $\phi \approx 2.83$.
- \item x2 and x3, gives us $\phi \approx 1.26$.
+ \item x1 and x2, gives us $\phi \approx 5.03$, subtracting $2\pi$ yields $-1.25$, which is close to the difference in phases between the signals: $-2.78 - (-) 1.45 = -1.33$.
+ \item x1 and x3, gives us $\phi \approx 1.57$, close to $-2.78 - (-)4.20 = 1.42$.
+ \item x2 and x3, gives us $\phi \approx 2.83$, close to $-1.45 - (-)4.20 = 2.75$.
 \end{itemize}
-Of course we would expect here to get a $\phi$ of 1.39, 2.78 and 1.39 respectively, since the frequencies and amplitudes are the same
+Of course we would want to get a delta $\phi$ of exactly $-1.33$, $1.42$ and $2.75$ respectively, since the frequencies and amplitudes are the same
 but just the phase is shifted. However, because we use a certain number of samples and therefore information gets lost,
-the function does not find the perfect values. If we, for example, increase the number of samples to 20000 for the delta between
-x1 and x2, we get a phase shift of approximately 1.38, which is already much closer.
-
+the function does not find the perfect values. If we, for example, increase the number of samples to 20000 for the last delta, 
+we get a phase shift of approximately 2.76, which is already much closer to the actual value.
 
 \subsection{}
+The equation defines a hyperbola because....
+
+The code in \autoref{code:2f} gives our implementation of the function. To determine the delay between the microphones, 
+the phase difference between the perceived signals is necessary and the frequency of the signal. The delay is calculated 
+according to the following function:
+\begin{equation}
+ delay = \delta \phi / (2\pi f)
+\end{equation}
+
 
 
 \begin{appendices}
@@ -218,5 +226,6 @@ x1 and x2, we get a phase shift of approximately 1.38, which is already much clo
 \lstinputlisting[caption={code2a},label={code:2a}]{../code/micfunction.m}
 \lstinputlisting[caption={code2b/c},label={code:2bc}]{../code/2b.m}
 \lstinputlisting[caption={code2e},label={code:2e}]{../code/delta.m}
+\lstinputlisting[caption={code2f},label={code:2f}]{../code/locate.m}
 \end{appendices}
 \end{document}
