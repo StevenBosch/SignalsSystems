@@ -90,8 +90,7 @@ We can generate x1(t)+x2(t) by plotting the sum of the separate generated functi
   \caption{The first 200 samples of the signal x1(t) and x2(t) added.}
   \label{fig2d1}
 \end{figure}
-\\
-Using the sumsinusoid function we can calculate the values for y(t):\\
+Using the sumsinusoid function we can calculate the values for y(t):
 $[A, f, phi] = 7.07107,400.00000,0.78540$, giving us:
 \begin{equation}
     y(t) = 7.07107 cos(400*2*\pi t + 0.78540)
@@ -150,18 +149,19 @@ For our code, see \autoref{code:2a}
 Two microphones at different locations can receive the signals coming from both of the sound sources in different phases. These phase differences cause the summed signal that the 
 microphone sends through to be different. This is explained by the fact that the values of the signals change over the course of one period, so if you shift one of the signals by a part of 
 one period, their summed signal will be different. For example,
-if we would sum two signals at a time in their oscillation when their value is both positive, they would amplify each other. Now if we would change the phase of one of the signals 
-by half an oscillation, this signal would be negative and the summed signal would be lower. In conclusion, the location of the microphones influences the perceived signals.
-We used the script we wrote in (a) to create a numerical example, given in answer (c), that shows this phenomenon for the extreme case that two signals double each other for one microphone,
-while they cancel each other out for the second microphone (see also \autoref{code:2bc}.
+if we would sum two signals at a time in their oscillation when their value is at a maximum, they would amplify each other (in-phase). Now if we would change the phase of one of the signals 
+by half an oscillation, this signal would be at its minimum and the summed signal would be lower (anti-phase). In conclusion, since the location of the microphones determines the relative phase of the received signals,
+it also determines the final sum of the received signals.
+We used the script we wrote in (a) to create a numerical example, given in answer (c), that shows this phenomenon for the extreme case that two signals double each other for one microphone (in-phase),
+while they cancel each other out for the second microphone (anti-phase) (see also \autoref{code:2bc}.
 
 \subsection{}
-See \autoref{code:2bc} for the script we wrote. \autoref{fig2bc}
+See \autoref{code:2bc} for the script we wrote, containing the constellation we designed. \autoref{fig2bc} shows the resulting signals of this constellation.
 
 \begin{figure}[H]
   \centering
   \includegraphics[width=0.7\columnwidth]{plot2B.eps}\\
-  \caption{}
+  \caption{Three signals: (1) the source signal (the same for both sources), (2) the signals in phase and (3) the signals in anti-phase.}
   \label{fig2bc}
 \end{figure}
 
