@@ -10,12 +10,14 @@
 #source B = A=5, f=400, phi = 0, posX=0, posY=1.5*(v_sound/f)
 #mic posX=0, posY=1*(v_sound/f)
 v_sound = 343.3;
-ans = micfunction(0, 0.75*v_sound/400, 2, [0, 0], [0, 1.5*v_sound/400], [5, 5], [400, 400], [0, 0], 8000);
-ans2 = micfunction(0, v_sound/400, 2, [0, 0], [0, 1.5*v_sound/400], [5, 5], [400, 400], [0, 0], 8000);
-ans3 = micfunction(0, 0.75*v_sound/400, 1, 0, 0, 5, 400, 0, 8000);
-plot((1:200), ans3(1:200), (1:200),ans(1:200), (1:200), ans2(1:200));
+
+ans = micfunction(0, 0.75*v_sound/400, 2, [0, 0], [0, 1.5*v_sound/400], [5, 5], [400, 400], [0, 0], 8000)
+ans2 = micfunction(0, v_sound/400, 2, [0, 0], [0, 1.5*v_sound/400], [5, 5], [400, 400], [0, 0], 8000)
+ans3 = micfunction(0, 0.75*v_sound/400, 1, 0, 0, 5, 400, 0, 8000)
+
+plot( (1:100), ans(1:100), "-", (1:100), ans2(1:100), "--", (1:100), ans3(1:100), ":")
 xlabel("Sample")
 ylabel("Amplitude (A)")
-title ("The first 200 samples of source A and source B, both in and out of phase)")
-legend ("Original Source A/SourceB", "Source A + Source B", "Source A - Source B");
-print -deps ../report/plot2B.eps;
+title ("The first 100 samples of source A and source B, both in and out of phase")
+legend ("Original Source A/SourceB", "Source A + Source B", "Source A - Source B")
+print -dpng ../report/plot2B.png;

@@ -17,4 +17,4 @@ xlabel("Sample")
 ylabel("Amplitude (A)")
 title ("The sound source, percieved at three different locations")
 legend ("Mic1", "Mic2", "Mic3")
-print -deps ../report/plot4D.eps;
+print -dpng ../report/plot2D.png;
