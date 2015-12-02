@@ -1,4 +1,5 @@
 function [ans] = micfunction( micX, micY, k, sourcesX, sourcesY, A, f,phi,Fs )
+
     # micX = x position of the mic (in meters)
     # micY = y position of the mic (in meters)
     # k = number of sound sources
