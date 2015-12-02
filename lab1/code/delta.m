@@ -6,10 +6,10 @@ function [shiftPhi]=delta(A1,f1,phi1, A2,f2,phi2, Fs)
 
 # Calculate how much n is one period 
 nLongPeriod = Fs/f1
-# Compute the error over least common multiple times the long period (base frequency of the two sinusoids)
+# Compute the error over least common multiple times the long period (base frequency of the two sinusoids combined)
 nLCM = lcm(f1, f2)
 
-#generate the sinusoids, t0 = 0, t1 = two full periods of the slower sinusoid
+#generate the sinusoids, t0 = 0, t1 = two full periods base frequency of the combined signal
 sin1 = gensinusoid(A1, f1, phi1, 0, (2*nLCM)/Fs, Fs);
 sin2 = gensinusoid(A2, f2, phi2, 0, (2*nLCM)/Fs, Fs);
 

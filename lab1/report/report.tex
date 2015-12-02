@@ -176,10 +176,10 @@ microphone and the sound source and $\phi$ is the phase.
 Using these calculation, we get the following perceived signals for the three microphones:
 \begin{itemize}
  \item Microphone 1 (0,0): $x(t) = 5cos(800 \pi t)$.
- \item Microphone 2 (50,0): $x(t) \approx 5cos(800 \pi t + 1.39)$.
- \item Microphone 3 (100,0): $x(t) \approx 5cos(800 \pi t + 2.78)$.
+ \item Microphone 2 (50,0): $x(t) \approx 5cos(800 \pi t - 1.39)$.
+ \item Microphone 3 (100,0): $x(t) \approx 5cos(800 \pi t - 2.78)$.
 \end{itemize}
-
+Figure \ref{fig2d} shows these functions plotted, created using the micfunction, given in appendix \autoref{code:2a}.
 \begin{figure}[H]
   \centering
   \includegraphics[width=0.7\columnwidth]{plot2D.png}\\
@@ -189,10 +189,26 @@ Using these calculation, we get the following perceived signals for the three mi
 
 \subsection{}
 \autoref{code:2e} gives our implementation of requested function. Given two signals the function shifts one of the two signals
-for the range of the highest wavelength of the two signals, with a step size of $1/f_s$. For every such phase we calculate the
-delta as the sum squared error over the least common multiple of the two frequencies of the signals, as the delta function.
+for the range of the highest wavelength of the two signals, with a step size of $1/f_s$. For every such phase we calculate the sum squared error over the least common multiple of the two frequencies of the signals.
 We use the least common multiple of the two frequencies, because after that amount of oscillations by the signal with the smallest
-wavelength, the two signals reach the same point again. Finally this delta gives the phase 
+wavelength, the two signals reach the same point again. Finally we have the shift (the amount of shifted samples) that yields us the lowest sum squared error and
+from this we can calculate the phase shift that yields this least sum squared error.
+
+Using this function for the signals in (d) ($x1(t) = 5cos(800 \pi t)$, $x2(t) \approx 5cos(800 \pi t + 1.39)$ and $x(t) \approx 5cos(800 \pi t + 2.78)$)
+we get the following resulting phase shifts:
+\begin{itemize}
+ \item x1 and x2, gives us $\phi \approx 1.26$.
+ \item x1 and x3, gives us $\phi \approx 2.83$.
+ \item x2 and x3, gives us $\phi \approx 1.26$.
+\end{itemize}
+Of course we would expect here to get a $\phi$ of 1.39, 2.78 and 1.39 respectively, since the frequencies and amplitudes are the same
+but just the phase is shifted. However, because we use a certain number of samples and therefore information gets lost,
+the function does not find the perfect values. If we, for example, increase the number of samples to 20000 for the delta between
+x1 and x2, we get a phase shift of approximately 1.38, which is already much closer.
+
+
+\subsection{}
+
 
 \begin{appendices}
 \section{Code}
@@ -201,5 +217,6 @@ wavelength, the two signals reach the same point again. Finally this delta gives
 \lstinputlisting[caption={1d},label={code:1d}]{../code/1d.m}
 \lstinputlisting[caption={code2a},label={code:2a}]{../code/micfunction.m}
 \lstinputlisting[caption={code2b/c},label={code:2bc}]{../code/2b.m}
+\lstinputlisting[caption={code2e},label={code:2e}]{../code/delta.m}
 \end{appendices}
 \end{document}

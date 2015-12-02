@@ -188,7 +188,17 @@ Using these calculation, we get the following perceived signals for the three mi
 \end{figure}
 
 \subsection{}
-\autoref{code:2e} gives our implementation of requested function. 
+\autoref{code:2e} gives our implementation of requested function. Given two signals the function shifts one of the two signals
+for the range of the highest wavelength of the two signals, with a step size of $1/f_s$. For every such phase we calculate the sum squared error over the least common multiple of the two frequencies of the signals.
+We use the least common multiple of the two frequencies, because after that amount of oscillations by the signal with the smallest
+wavelength, the two signals reach the same point again. Finally we have the shift (the amount of shifted samples) that yields us the lowest sum squared error and
+from this we can calculate the phase shift that yields this least sum squared error.
+
+Using this function for the signals in (d) ($x1(t) = 5cos(800 \pi t)$, $x2(t) \approx 5cos(800 \pi t + 1.39)$ and $x(t) \approx 5cos(800 \pi t + 2.78)$)
+we get the following resulting phase shifts:
+\begin{itemize}
+ \item x1 and x2, gives us a $\phi$ of 
+\end{itemize}
 
 \begin{appendices}
 \section{Code}
