@@ -1,5 +1,4 @@
 function [ans] = gensinusoid(A,f,phi,t1,t2,Fs)
-<<<<<<< HEAD
 # The sinusoid function is: y(n)=Asin(2π f n + phi)
 # A: amplitude of the wave
 # f: frequency in Hertz (Hz)
