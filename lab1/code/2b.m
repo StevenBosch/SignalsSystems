@@ -20,4 +20,4 @@ xlabel("Sample")
 ylabel("Amplitude (A)")
 title ("The first 200 samples of source A and source B, both in and out of phase)")
 legend ("Original Source A/SourceB", "Source A + Source B", "Source A - Source B");
-#print -deps ../report/plot2B.eps;
+print -deps ../report/plot2B.eps;
