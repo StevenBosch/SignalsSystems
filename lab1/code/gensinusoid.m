@@ -10,6 +10,6 @@ totalTime = t2-t1;
 nSamples = totalTime * Fs;
 ans = zeros(1, nSamples);
 for i = 1:nSamples
-		t = t1 + (i-1)*1/Fs;
-		ans(i) = A * cos (2*pi  *f*t + phi);
-		endfor
+	t = t1 + (i-1)*1/Fs;
+	ans(i) = A * cos (2*pi  *f*t + phi);
+endfor
