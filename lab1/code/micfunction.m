@@ -10,17 +10,17 @@ function [ans] = micfunction( micX, micY, k, sourcesX, sourcesY, A, f,phi,Fs )
     # phi = phase shift of sound sources
 
     # The speed of sound is approximately 343.2 m/s
-    v_sound = 343.3
-    t1 = 0.0
-    t2 = 0.5
+    v_sound = 343.3;
+    t1 = 0.0;
+    t2 = 0.5;
 
     # the distances to each sound source (Euclidian)
     distances = zeros(1, k);
     # the corresponding delays
     delays = zeros(1, k);
     for i = 1:k
-        distances(i) = sqrt(abs(micX - sourcesX(i))**2 + abs(micY - sourcesY(i))**2)
-        delay(i) = -1 * distances(i) / v_sound
+        distances(i) = sqrt(abs(micX - sourcesX(i))**2 + abs(micY - sourcesY(i))**2);
+        delay(i) = -1 * distances(i) / v_sound;
     endfor
 
     # adjust the phase shifts of the signals according to their distance
