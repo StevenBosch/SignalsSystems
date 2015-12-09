@@ -2,7 +2,7 @@
 *.m~
 *.m~~
 
-# Latex Files 
+# Latex Files
 *.aux
 *.glo
 *.idx
@@ -27,3 +27,6 @@
 *.out
 *.synctex.gz
 *.pdf
+*.backup
+*.fls
+*_latexmk
