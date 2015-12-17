@@ -3,15 +3,15 @@ function ans = patternMatch(x, h)
     error('pearson(x,y): x and y are not of the same shape');
   end
 
-  signal = x;
-  mask = h;
+  signal = rot90(x);
+  mask = rot90(h);
 
   # Calculate cumsum for later calculation of the averages
   cumSumSignal = cumsum(signal);
   cumSumSignal = [0 cumSumSignal];
 
   # Denominator : mask part
-  meanMask = mean(mask)
+  meanMask = mean(mask);
   denomMask = sqrt(sum((mask-meanMask).^2));
 
   ans = zeros(1, length(signal)-length(mask)+1);
