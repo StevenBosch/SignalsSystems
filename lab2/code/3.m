@@ -1,7 +1,7 @@
-x = imread('page.pgm');
-y = imread('maskM.pgm');
+1;
 
-plot(patternMatch(x,y))
+signal = imread('page.pgm');
+mask = imread('maskM.pgm');
 
 # Calculate cumsum for later calculation of the averages
 cumSumSignal = cumsum(signal);

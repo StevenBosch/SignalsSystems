@@ -14,7 +14,7 @@ plot(patternMatch(y, y1))
 xlabel('Time (sample)')
 ylabel('Correlation Coefficient')
 title('Correlation of "Handel.wav" and the "hallelujah" mask')
-print -dpng ../report/plot2d.png;
+print -dpng ../report/plot2d.pdf;
 
 ## Fur elise
 [z, fs2] = wavread("furelise8kHZ.wav");
@@ -29,4 +29,4 @@ plot(patternMatch(z, z1))
 xlabel('Time (sample)')
 ylabel('Correlation Coefficient')
 title('Correlation of "Furelise.wav" and the "furelisecrop" mask')
-print -dpng ../report/plot2e.png;
+print -dpng ../report/plot2e.pdf;
