@@ -13,7 +13,7 @@ ylabel('Circular correlation')
 title('Circular correlation of x and x')
 print -dpng ../report/plot1b2.png;
 
-# 1c second part
+% 1c second part
 y = rotate(x,50);
 figure();
 plot(circorr(x,y))

@@ -13,7 +13,7 @@ ylabel('Pearson correlation')
 title('Circular correlation of x and x')
 print -dpng ../report/plot1gb.png;
 
-# 1gb second part
+% 1gb second part
 y = rotate(x,50);
 figure();
 plot(pearson(x,y))
@@ -28,7 +28,7 @@ for i = 0:0.4:2
   plot(pearson(x+i*(rand(1,100)*2-1), y))
   xlabel('Delay')
   ylabel('Pearson correlation')
-  title(['Noise factor = ' mat2str(i)])  
+  title(['Noise factor = ' mat2str(i)])
   filename = ["../report/plot" mat2str(i) "noise.png"]
   print -dpng filename
   saveas (1, filename);

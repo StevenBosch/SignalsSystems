@@ -1,7 +1,7 @@
 1;
 close all;
 
-## hallelujah
+%% hallelujah
 [y, fs] = wavread("handel.wav");
 [y1, fs1] = wavread("hallelujah.wav");
 
@@ -16,7 +16,7 @@ ylabel('Correlation Coefficient')
 title('Correlation of "Handel.wav" and the "hallelujah" mask')
 print -dpdf ../report/plot2d.pdf;
 
-## Fur elise
+%% Fur elise
 [z, fs2] = wavread("furelise8kHZ.wav");
 [z1, fs3] = wavread("cropelise8kHz.wav");
 
