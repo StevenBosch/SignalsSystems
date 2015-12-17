@@ -183,7 +183,52 @@ Figure \ref{fig:1g1} gives the plots of $x$, the Pearson correlation between $x$
 
 \section{A more general Pearson correlator}
 \subsection{}
-Our code can be seen in Appendix~\ref{code:pearson2}
+See Appendix~\ref{code:pearson2} for our implementation of the required function.
+
+\subsection{}
+Figure \ref{fig:2b} gives the function $x[n]$, the masks $h1[n]$ and $h2[n]$ and their
+Pearson correlation with $x[n]$. We can conclude that the mask $h1$ is found exactly
+in the signal $x[n]$, as there is a slice of $x[n]$ that has a Pearson correlation
+of 1 with $h1$, whereas $h2$ is almost matched with a slice of $x[n]$, but not exactly
+(a Pearson correlation of almost 1). So we conclude that $h1$ exists in $x[n]$, but
+$h2$ does not.
+
+\begin{figure}
+  \centering
+  \begin{subfigure}{.52\textwidth}
+    \centering
+    \includegraphics[width=\textwidth]{plot2b1.png}
+    \caption{x[n]}
+    \label{fig:2b1}
+  \end{subfigure}
+  \begin{subfigure}{.49\textwidth}
+    \centering
+    \includegraphics[width=\textwidth]{plot2b2.png}
+    \caption{h1[n]}
+    \label{fig:2b2}
+  \end{subfigure}
+  \begin{subfigure}{.49\textwidth}
+    \centering
+    \includegraphics[width=\textwidth]{plot2b3.png}
+    \caption{h2[n]}
+    \label{fig:2b3}
+  \end{subfigure}
+  \begin{subfigure}{.49\textwidth}
+    \centering
+    \includegraphics[width=\textwidth]{plot2b4.png}
+    \caption{Pearson correlation between x[n] and h1[n].}
+    \label{fig:2b4}
+  \end{subfigure}
+  \begin{subfigure}{.49\textwidth}
+    \centering
+    \includegraphics[width=\textwidth]{plot2b5.png}
+    \caption{Pearson correlation between x[n] and h2[n].}
+    \label{fig:2b5}
+  \end{subfigure}
+  \caption{}
+  \label{fig:2b}
+\end{figure}
+
 \begin{appendices}
 \section{Code}
  \lstinputlisting[caption={circorr},label={code:1a}]{../code/circorr.m}
