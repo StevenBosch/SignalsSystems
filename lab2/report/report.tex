@@ -83,7 +83,7 @@ See section \ref{code:1c} in the appendix for our implementation of the function
 	\centering
 	\includegraphics[width=.7\textwidth]{plot1c.png}
 	\caption{The circular correlation between $x$ and itself.}
-	\label{fig:1b2}
+	\label{fig:1c}
 \end{figure}
 
 \subsection{}
@@ -193,7 +193,7 @@ of 1 with $h1$, whereas $h2$ is almost matched with a slice of $x[n]$, but not e
 (a Pearson correlation of almost 1). So we conclude that $h1$ exists in $x[n]$, but
 $h2$ does not.
 
-\begin{figure}
+\begin{figure}[H]
   \centering
   \begin{subfigure}{.52\textwidth}
     \centering
@@ -229,6 +229,56 @@ $h2$ does not.
   \label{fig:2b}
 \end{figure}
 
+\subsection{}
+See Appendix~\ref{code:patternMatch} for our implementation of the function patternMatch.
+Applying this function on x and h2 from the previous section, we acquire the plot
+given in figure \ref{fig:2c}. From the figure we can observe the highest correlation value
+in the given signal and check whether the mask can be foun in the actual given slice of signal,
+not in the theoretical circular signal. In this specific case we can observe the highest
+correlation at what seems to be sample 42. The correlation is not 1 though, which means
+that the exact mask is not in the signal.
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.7\textwidth]{plot2c.pdf}
+  \caption{The Pearson correlation for every subsequent slice of $x[n]$ and $h2$.}
+  \label{fig:2c}
+\end{figure}
+
+\subsection{}
+Figure \ref{fig:2d} gives the Pearson correlation between the mask hallelujah and
+the signal handel. The figures shows that there is one exact match of the mask 'hallelujah'.
+On the one han we can therefore conclude that this way of finding the mask works,
+since it finds the exactly matching mask in the signal. On the other hand, this way
+we do not find other occurences of the word 'hallelujah' that just are not completely
+similar. If the word is only slightly pronounce differently or at another speed or
+intensity, the correlation coefficient might be that much significantly lower, that
+the occurence is not distinguishable from the other sound.
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.7\textwidth]{plot2d.pdf}
+  \caption{The Pearson correlation for every slice of handel.wav and hallelujah.wav.}
+  \label{fig:2d}
+\end{figure}
+
+\subsection{}
+Figure \ref{fig:2e} gives the Pearson correlation between every subsequent slice of
+the signal furelise and the mask cropelise. The figure shows multiple peaks, of which
+one peak reaches the value 1, which signifies one slice being the exact same as the mask.
+Furthermore we see more peaks reaching a correlation coefficient of approximately 0.5.
+This indicates that there are multiple fragments in the signal which resemble the mask,
+but are slightly different in some aspect(s). Therefore to detect the note pattern
+of the musical interval, you could for example use an emperically determined threshold.
+When a correlation coefficient is higher than the threshold, it is recognized as
+the same musical pattern.
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.7\textwidth]{plot2e.pdf}
+  \caption{The Pearson correlation for every slice of furelise8kHZ.wav and cropelise8kHZ.wav.}
+  \label{fig:2e}
+\end{figure}
+
+\section{}
+
 \begin{appendices}
 \section{Code}
  \lstinputlisting[caption={circorr},label={code:1a}]{../code/circorr.m}
@@ -237,5 +287,6 @@ $h2$ does not.
  \lstinputlisting[caption={circpearson},label={code:1d}]{../code/circpearson.m}
  \lstinputlisting[caption={gensinusoid},label={code:gensinusoid}]{../code/gensinusoid.m}
  \lstinputlisting[caption={pearson2},label={code:pearson2}]{../code/pearson2.m}
+ \lstinputlisting[caption={patternMatch},label={code:patternMatch}]{../code/patternMatch.m}
 \end{appendices}
 \end{document}
