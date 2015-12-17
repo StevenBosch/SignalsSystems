@@ -1,8 +1,12 @@
 1;
-## hallelujah
 close all;
+
+## hallelujah
 [y, fs] = wavread("handel.wav");
 [y1, fs1] = wavread("hallelujah.wav");
+
+y = rot90(y);
+y1 = rot90(y1);
 
 % The plot of the correlation
 figure()
@@ -15,6 +19,9 @@ print -dpng ../report/plot2d.png;
 ## Fur elise
 [z, fs2] = wavread("furelise8kHZ.wav");
 [z1, fs3] = wavread("cropelise8kHz.wav");
+
+z = rot90(z);
+z1 = rot90(z1);
 
 % The plot of the correlation
 figure()
