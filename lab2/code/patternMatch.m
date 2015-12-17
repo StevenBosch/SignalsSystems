@@ -1,10 +1,7 @@
-function ans = patternMatch(x, h)
-  if (length(h) > length(x))
+function ans = patternMatch(signal, mask)
+  if (length(mask) > length(signal))
     error('pearson(x,y): x and y are not of the same shape');
   end
-
-  signal = rot90(x);
-  mask = rot90(h);
 
   # Calculate cumsum for later calculation of the averages
   cumSumSignal = cumsum(signal);
