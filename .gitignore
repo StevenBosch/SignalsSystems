@@ -1,6 +1,7 @@
 # Octave/Matlab Files
 *.m~
 *.m~~
+octave-workspace
 
 # Latex Files
 *.aux
