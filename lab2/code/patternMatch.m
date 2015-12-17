@@ -27,4 +27,3 @@ function ans = patternMatch(signal, mask)
       # The final answer
       ans(d) = nom / (denomSignal*denomMask);
   endfor
-  # Bye bye

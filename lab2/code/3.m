@@ -15,7 +15,7 @@ maskVector = reshape(mask, 1, numel(mask));
 meanMask = mean(maskVector);
 denomMask = sqrt(sum((maskVector-meanMask).^2));
 
-ans = zeros(signalRows-maskRows, signalColumns-maskColumns+1);
+result = zeros(signalRows-maskRows, signalColumns-maskColumns+1);
 
 for dRow = 1:signalRows-maskRows+1
   for dColumn = 1:signalColumns-maskColumns+1
@@ -30,12 +30,12 @@ for dRow = 1:signalRows-maskRows+1
     # Denominator : signal part
     denomSignal = sqrt( sum( sliceMinAvg.^2 ) );
     # The final answer
-    ans(dRow,dColumn) = nom / (denomSignal*denomMask);
+    result(dRow,dColumn) = nom / (denomSignal*denomMask);
   endfor
 endfor
-mesh(ans)
+mesh(result)
 xlabel('Rows')
 ylabel('Columns')
 zlabel('Pearson correlation')
 title('Pearson correlation for maskM and page')
-print -dpng ../report/plot3.png;
+print -dpdf ../report/plot3.pdf;
