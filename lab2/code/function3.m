@@ -1,8 +1,4 @@
-function answer = function3()
-    profile off
-    profile on
-    signal = imread('page.pgm');
-    mask = imread('maskM.pgm');
+function answer = function3(signal, mask)
 
     signalRows = rows(signal);
     signalColumns = columns(signal);
@@ -16,7 +12,7 @@ function answer = function3()
     for i = 1:numel(maskVector)
         tmpVector(i) = maskVector(i);
     end
-    maskVector = tmpVector
+    maskVector = tmpVector;
 
     # Create a duplicate signal matrix so the values can alsobe below zero
     signalVector = reshape(signal, 1, numel(signal));
@@ -49,14 +45,10 @@ function answer = function3()
             answer(dRow,dColumn) = nom / (denomSignal*denomMask);
         endfor
     endfor
-    mesh(answer)
-    xlabel('Rows')
-    ylabel('Columns')
-    zlabel('Pearson correlation')
-    title('Pearson correlation for maskM and page')
+    % mesh(answer)
+    % xlabel('Rows')
+    % ylabel('Columns')
+    % zlabel('Pearson correlation')
+    % title('Pearson correlation for maskM and page')
     % print -dpng ../report/plot3.png;
-    profile off
-
-    data = profile('info')
-    profshow(data)
 end
