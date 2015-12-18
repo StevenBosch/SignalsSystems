@@ -25,9 +25,9 @@ for row = 2:rows(coeff)-1
     for col = 2:columns(coeff)-1
         % The value of the current cell
         val = coeff(row, col);
-        if (val > threshold &
-            coeff(row-1, col) < val & coeff(row+1,col) < val &
-            coeff(row, col-1) < val & coeff(row, col+1) < val
+        if (val > threshold &&
+            coeff(row-1, col) < val && coeff(row+1,col) < val &&
+            coeff(row, col-1) < val && coeff(row, col+1) < val
             )
             counter = counter+1;
         end
