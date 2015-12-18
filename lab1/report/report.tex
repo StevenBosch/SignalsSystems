@@ -188,7 +188,7 @@ Figure \ref{fig2d} shows these functions plotted, created using the micfunction,
 \end{figure}
 
 \subsection{}
-\autoref{code:2e} gives our implementation of requested function. Given two signals the function shifts one of the two signals
+\autoref{code:2e} gives our implementation of the requested function. Given two signals the function shifts one of the two signals
 for the range of the highest wavelength of the two signals, with a step size of $1/f_s$. For every such phase we calculate the sum squared error over the least common multiple of the two frequencies of the signals.
 We use the least common multiple of the two frequencies, because after that amount of oscillations by the signal with the smallest
 wavelength, the two signals reach the same point again. Finally we have the shift (the amount of shifted samples) that yields us the lowest sum squared error and
@@ -207,7 +207,7 @@ the function does not find the perfect values. If we, for example, increase the 
 we get a phase shift of approximately 2.76, which is already much closer to the actual value.
 
 \subsection{}
-The equation defines a hyperbola because....
+The equation to determine all possible emitter locations (x,y) defines a hyperbola because, the perceived sound signal, which is in a certain phase, can be heard from a sound source at multiple places a long a line with distances described by $\phi + 2\pi k$, describing a hyperbola. 
 
 The code in \autoref{code:2f} gives our implementation of the function. To determine the delay between the microphones, 
 the phase difference between the perceived signals is necessary and the frequency of the signal. The delay is calculated 
@@ -216,16 +216,31 @@ according to the following function:
  delay = \delta \phi / (2\pi f)
 \end{equation}
 
+\section{Doppler effect}
+Because the sound source has a velocity, at each sample the distance between the source and the microphone is different. Using these diferences we can calculate the perceived sound at every sample moment in time. We first calculate the difference in the x-coordinate of the sound source for each sample (the y-coordinate does not change, nor do the coordinates of the microphone). We do this using the following equation:
+\begin{equation}
+ vSample = v / Fs
+\end{equation}
+In which vSample is the traveled distance in meters per sample, $v$ is the velocity of the sound source in $m/s$ and $Fs$ is the sample rate. Then we calculate the total amount of samples that we need to measure, by first calculating the total amount of time it takes for the sound source to travel the distance, using $t = 250/v$, and subsequently multiplying this by the sample rate: $n = t * Fs$. We can now calculate all the samples by iterating over the total amount of samples and for every sample $i$ use our function $micfunction$ (defined in \autoref{code:2a} in the appendix), using an updated distance in every iteration ($i*vSample$). Our implementation of the described algorithm is given in \autoref{code:3}.
 
+Plotting the results yields the graph shown in figure \ref{fig3}. When we listen to the sound, we hear that it starts at a high pitch, which gradually decreases until it is almost at the microphone at which point it fastly decreases to a low pitch (low frequency). After it has passed the microphone it increases again to a higher pitch. This is actually the opposite from what we would expect, since the Doppler effect states that a sound source moving toward you will result in an increasingly higher sound, because each subsequent soundwave would need less time to reach you, resulting in an increasingly higher frequency. When the sound source would then have passed, the frequency would become lower, because each subsequent wave would need more time to reach you. This Doppler principle actually explains the exact opposite from what we hear and see in the recorded sound.
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.7\columnwidth]{plot3.png}\\
+  \caption{The perceived sound of a moving sound source}
+  \label{fig3}
+\end{figure}
 
 \begin{appendices}
 \section{Code}
-\lstinputlisting[caption={gensinusoid},label={code:gensinusoid}]{../code/gensinusoid.m}
-\lstinputlisting[caption={sumsinusoid},label={code:simsinusoid}]{../code/sumsinusoid.m}
-\lstinputlisting[caption={1d},label={code:1d}]{../code/1d.m}
-\lstinputlisting[caption={code2a},label={code:2a}]{../code/micfunction.m}
-\lstinputlisting[caption={code2b/c},label={code:2bc}]{../code/2b.m}
-\lstinputlisting[caption={code2e},label={code:2e}]{../code/delta.m}
-\lstinputlisting[caption={code2f},label={code:2f}]{../code/locate.m}
+\lstinputlisting[caption={Code assignment 1a (gensinusoid)},label={code:gensinusoid}]{../code/gensinusoid.m}
+\lstinputlisting[caption={Code assignment 1c (sumsinusoid)},label={code:simsinusoid}]{../code/sumsinusoid.m}
+\lstinputlisting[caption={Code assignment 1d},label={code:1d}]{../code/1d.m}
+\lstinputlisting[caption={Code assignment 2a (micfunction)},label={code:2a}]{../code/micfunction.m}
+\lstinputlisting[caption={Code assignment 2b/c},label={code:2bc}]{../code/2b.m}
+\lstinputlisting[caption={Code assignment 2e (delta)},label={code:2e}]{../code/delta.m}
+\lstinputlisting[caption={Code assignment 2f (ocate)},label={code:2f}]{../code/locate.m}
+\lstinputlisting[caption={Code assignment 3 (Doppler)},label={code:3}]{../code/3.m}
 \end{appendices}
 \end{document}
