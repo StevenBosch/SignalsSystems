@@ -197,19 +197,40 @@ from this we can calculate the phase shift that yields this least sum squared er
 Using this function for the signals in (d) ($x1(t) = 5cos(800 \pi t - 2.78)$, $x2(t) \approx 5cos(800 \pi t + 1.45)$ and $x(t) \approx 5cos(800 \pi t + 4.20)$)
 we get the following resulting phase shifts:
 \begin{itemize}
- \item x1 and x2, gives us $\phi \approx 1.26$.
- \item x1 and x3, gives us $\phi \approx 2.83$.
- \item x2 and x3, gives us $\phi \approx 1.26$.
+ \item x1 and x2, gives us $\phi \approx 5.03$, subtracting $2\pi$ yields $-1.25$, which is close to the difference in phases between the signals: $-2.78 - (-) 1.45 = -1.33$.
+ \item x1 and x3, gives us $\phi \approx 1.57$, close to $-2.78 - (-)4.20 = 1.42$.
+ \item x2 and x3, gives us $\phi \approx 2.83$, close to $-1.45 - (-)4.20 = 2.75$.
 \end{itemize}
-Of course we would expect here to get a $\phi$ of 1.39, 2.78 and 1.39 respectively, since the frequencies and amplitudes are the same
+Of course we would want to get a delta $\phi$ of exactly $-1.33$, $1.42$ and $2.75$ respectively, since the frequencies and amplitudes are the same
 but just the phase is shifted. However, because we use a certain number of samples and therefore information gets lost,
-the function does not find the perfect values. If we, for example, increase the number of samples to 20000 for the delta between
-x1 and x2, we get a phase shift of approximately 1.38, which is already much closer.
+the function does not find the perfect values. If we, for example, increase the number of samples to 20000 for the last delta, 
+we get a phase shift of approximately 2.76, which is already much closer to the actual value.
 
 \subsection{}
 The equation defines a hyperbola because....
 
+The code in \autoref{code:2f} gives our implementation of the function. To determine the delay between the microphones, 
+the phase difference between the perceived signals is necessary and the frequency of the signal. The delay is calculated 
+according to the following function:
+\begin{equation}
+ delay = \delta \phi / (2\pi f)
+\end{equation}
 
+\section{Doppler effect}
+Because the sound source has a velocity, at each sample the distance between the source and the microphone is different. Using these diferences we can calculate the perceived sound at every sample moment in time. We first calculate the difference in the x-coordinate of the sound source for each sample (the y-coordinate does not change, nor do the coordinates of the microphone). We do this using the following equation:
+\begin{equation}
+ vSample = v / Fs
+\end{equation}
+In which vSample is the traveled distance in meters per sample, $v$ is the velocity of the sound source in $m/s$ and $Fs$ is the sample rate. Then we calculate the total amount of samples that we need to measure, by first calculating the total amount of time it takes for the sound source to travel the distance, using $t = 250/v$, and subsequently multiplying this by the sample rate: $n = t * Fs$. We can now calculate all the samples by iterating over the total amount of samples and for every sample $i$ use our function $micfunction$ (defined in \autoref{code:2a} in the appendix, note that we used micfunction2 here because we used different t\_1 and t\_2, but the rest of the function remains the same), using an updated distance in every iteration ($i*vSample$). Our implementation of the described algorithm is given in \autoref{code:3}.
+
+Plotting the results yields the graph shown in figure \ref{fig3}. When we listen to the sound, we hear that it starts at a high pitch, which gradually decreases until it is almost at the microphone at which point it fastly decreases to a low pitch (low frequency). After it has passed the microphone it increases again to a higher pitch. 
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.7\columnwidth]{plot3.png}\\
+  \caption{The perceived sound of a moving sound source}
+  \label{fig3}
+\end{figure}
 
 \begin{appendices}
 \section{Code}
@@ -219,5 +240,7 @@ The equation defines a hyperbola because....
 \lstinputlisting[caption={code2a},label={code:2a}]{../code/micfunction.m}
 \lstinputlisting[caption={code2b/c},label={code:2bc}]{../code/2b.m}
 \lstinputlisting[caption={code2e},label={code:2e}]{../code/delta.m}
+\lstinputlisting[caption={code2f},label={code:2f}]{../code/locate.m}
+\lstinputlisting[caption={code3},label={code:3}]{../code/3.m}
 \end{appendices}
 \end{document}

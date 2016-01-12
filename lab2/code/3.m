@@ -1,25 +1,26 @@
 1;
 
-% Get the correlation coefficients
-% profile off
-% profile on
-signal = imread('page.pgm');
-mask = imread('maskM.pgm');
+% The total amount of m's
+amountM = 67;
 
-coeff = function3(signal, mask);
-% profile off
-% data = profile('info')
-% profshow(data)
+% Get the correlation coefficients
+%signal = imread('page.pgm');
+%mask = imread('maskM.pgm');
+
+%coeff = function3(signal, mask);
 
 % Find the peaks
 % First pad with zeros
-coeff = [zeros(1,columns(coeff)); coeff];
-coeff = [coeff; zeros(1,columns(coeff))];
+%coeff = [zeros(1,columns(coeff)); coeff];
+%coeff = [coeff; zeros(1,columns(coeff))];
 
-coeff = [zeros(rows(coeff),1), coeff];
-coeff = [coeff, zeros(rows(coeff),1)];
+%coeff = [zeros(rows(coeff),1), coeff];
+%coeff = [coeff, zeros(rows(coeff),1)];
 
-threshold = 0.5;
+% The threshold for filtering the peaks (emperically determined as 5 times the absolute standard deviation)
+threshold = 4.68 * abs(std(reshape(coeff, 1, numel(coeff))))
+
+% Now count the peaks in the coefficients matrix. Finally plot the peaks.
 counter = 0;
 for row = 2:rows(coeff)-1
     for col = 2:columns(coeff)-1
@@ -33,3 +34,4 @@ for row = 2:rows(coeff)-1
         end
     end
 end
+counter
