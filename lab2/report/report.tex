@@ -278,6 +278,44 @@ the same musical pattern.
 \end{figure}
 
 \section{}
+Our implementation of the solution to the given problem is given in sections \ref{code:3} and \ref{code:function3} of the appendix.
+Code 3 reads in the signal and the mask and calls upon function 3 to calculate the Pearson coefficients. This is done in the same manner
+as in patternMatch, with the difference that it now walks through a matrix of values instead of a vector. First we reshape the mask into
+a vector and then for every step in the matrix the slice of matrix that is to be compared with the mask is reshaped into a vector as well.
+Thereafter the exact same steps are taken as in patternMatch, resulting in a matrix of Pearson correlation coefficients, which can be
+observed in figure \ref{fig3}.
+
+\begin{figure}[H]
+ \centering
+ \includegraphics[width=.7\textwidth]{mesh3.png}
+ \caption{Pearson correlation coefficients for the signal page.pgm and the mask maskM.pgm.}
+ \label{fig3}
+\end{figure}
+
+As we can see, this results in a landspeak of peaks and valleys. The peaks, corresponding to a high Pearson correlation, should resemble
+the places where there should approximately exist an 'm' in the page (not exactly, since the indexes should be shifted a bit to the middle of the 
+compared slice). Now since our goal is to find the m's in the page, we need to count the high peaks of Pearson correlation in this landscape.
+To do that we use a threshold filter. Only if a Pearson correlation exceeds this threshold, we count it as an m. Since the world is noisy, 
+this threshold is not set at exactly 1, which would be the case in ideal circumstances. As can be seen in Code 3, we optimized the threshold
+parameter at:
+\begin{equation}
+threshold = |4.68 * \sigma(coefficients)| 
+\end{equation}
+At this threshold our program counted 68 m's, whereas we ourselves counted 67 (we might have
+made mistakes in our counting as well). To test the robustness of our system, we ran the counter for diferent factors of noise (see Code 3), where we added noise to the signal as follows:
+\begin{equation}
+ signal = signal + noiseFactor * randn(rows(signal),columns(signal))
+\end{equation}
+in which noiseFactor is a factor from 0 to 10 (iterated over) and randn() returns a normalized distribution of random numbers with mean 0 and variance 1.
+
+Figure \ref{fig3b} gives the success rate (the number of counted m's divided by the actual number of m's (as we counted them)) for every noise level we tried.
+\begin{figure}[H]
+ \centering
+ \includegraphics[width=.7\textwidth]{fig3.png}
+ \caption{Robustness of the program, measured in terms of success (counted m's divided by actual number of m's).}
+ \label{fig3b}
+\end{figure}
+A success rate of 1 is perfect, since then the program reports no false positives or false negatives. The figure shows that the success rate is almost 1 for no noise up to a noise factor of 5. When more noise is added the rate starts increasing up to around 1.2 at a noise factor of 10 (corresponding to 80 found m's). In conclusion it seems quite robust, since it still counts the same number of m's for a noise factor up to 5. It is hard to say though, whether this would be robust in the real world, since we do not know the `noise factor' that is present in real world situations. 
 
 \begin{appendices}
 \section{Code}
@@ -288,5 +326,7 @@ the same musical pattern.
  \lstinputlisting[caption={gensinusoid},label={code:gensinusoid}]{../code/gensinusoid.m}
  \lstinputlisting[caption={pearson2},label={code:pearson2}]{../code/pearson2.m}
  \lstinputlisting[caption={patternMatch},label={code:patternMatch}]{../code/patternMatch.m}
+ \lstinputlisting[caption={Code 3},label={code:3}]{../code/3(b).m}
+ \lstinputlisting[caption={Function 3},label={code:function3}]{../code/function3.m}
 \end{appendices}
 \end{document}

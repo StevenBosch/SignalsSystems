@@ -11,9 +11,9 @@
 #mic posX=0, posY=1*(v_sound/f)
 v_sound = 343.3;
 
-ans = micfunction(0, 0.75*v_sound/400, 2, [0, 0], [0, 1.5*v_sound/400], [5, 5], [400, 400], [0, 0], 8000)
-ans2 = micfunction(0, v_sound/400, 2, [0, 0], [0, 1.5*v_sound/400], [5, 5], [400, 400], [0, 0], 8000)
-ans3 = micfunction(0, 0.75*v_sound/400, 1, 0, 0, 5, 400, 0, 8000)
+ans = micfunction(0, 0.75*v_sound/400, 2, [0, 0], [0, 1.5*v_sound/400], [5, 5], [400, 400], [0, 0], 8000, 0.0, 0.5)
+ans2 = micfunction(0, v_sound/400, 2, [0, 0], [0, 1.5*v_sound/400], [5, 5], [400, 400], [0, 0], 8000, 0.0, 0.5)
+ans3 = micfunction(0, 0.75*v_sound/400, 1, 0, 0, 5, 400, 0, 8000, 0.0, 0.5)
 
 plot( (1:100), ans(1:100), "-", (1:100), ans2(1:100), "--", (1:100), ans3(1:100), ":")
 xlabel("Sample")
