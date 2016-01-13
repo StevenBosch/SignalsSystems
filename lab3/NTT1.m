@@ -1,6 +1,5 @@
 function[ans] = NTT1(x)
   N = length(x);
   [root, prime] = rootsofunity(N)
-  matrix = VDM(root, N) * x')
-  ans = rem(matrix, prime);
+  ans = rem((VDM(root, N) * x'), prime)'
 end
