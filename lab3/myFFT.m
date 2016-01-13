@@ -12,10 +12,10 @@ function[y] = myFFT(a, omega)
   y_even = myFFT(a_even, omega^2)
   y_odd = myFFT(a_odd, omega^2)
   
-  for ind = 1:n/2
+  for ind = 1 : n/2
     ind
     y(ind) = y_even(ind) + x*y_odd(ind)
-    y(ind+n/2) = y_even(ind) - x*y_odd(ind)
+    y(ind + n/2) = y_even(ind) - x*y_odd(ind)
     x = x * omega
   endfor
 end
