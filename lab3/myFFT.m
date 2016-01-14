@@ -6,8 +6,8 @@ function[y] = myFFT(a, omega)
   endif
   x = omega^0
   
-  a_even = a((2:2:n))
-  a_odd = a((1:2:n))
+  a_even = a((1:2:n))
+  a_odd = a((2:2:n))
   
   y_even = myFFT(a_even, omega^2)
   y_odd = myFFT(a_odd, omega^2)
