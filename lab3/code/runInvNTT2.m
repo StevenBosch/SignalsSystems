@@ -1,8 +1,8 @@
-function[y] = runNNT(a)
+function[y] = runInvNTT2(a)
   N = length(a);
   [root, prime] = rootsofunity(N)
   k = (prime-1)/ N;
   rootInv = modinverse(root, prime)
   omega = rem(rootInv^k, prime)
-  y = myNNT(a, omega, prime);
+  y = NTT2(a, omega, prime);
 end
