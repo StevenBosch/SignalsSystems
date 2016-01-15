@@ -1,4 +1,4 @@
 function[y] = runFFT(a)
-  omega = exp(-i*2*pi/length(a))
-  myFFT(a, omega)
+  omega = exp(-i*2*pi/length(a));
+  y = myFFT(a, omega);
 end
