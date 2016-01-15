@@ -165,5 +165,35 @@ ans = 0 + 0i   0 - 2i   0 + 0i   0 + 2i
 
 
 \section{Convolution using NTTs}
- 
+Listing \ref{myconv2} shows the implementation of the convolution function using NTT instead of FFT. As we can see, it is the exact same implementation, with the only difference being the call of NTT1 and NTTinv1 instead of FFT and IFFT. The listing below shows that the output is the same:
+
+\begin{lstlisting}
+>>> myconv2(x, y)
+ans = 4   13   28   21   23   16   28
+
+>>> myconv(x, y)
+ans = 4.0000   13.0000   28.0000   50.0000   52.0000   45.0000   28.0000
+
+>>> myconv(1:4, 11:13)
+ans =
+
+    11    34    70   106    87    52
+
+>>> myconv2(1:4, 11:13)
+ans =
+
+   3   2   0   5   5   5
+
+ans =
+
+   1   3   3   5   1   4
+
+ans =
+
+   4   6   0   1   3   3
+\end{lstlisting}
+
+
+ \lstinputlisting[caption={My convolution using NTT},label={myconv2}]{../code/myconv2.m}
+
 \end{document}
