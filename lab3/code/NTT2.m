@@ -14,8 +14,8 @@ function[y] = NTT2(a, omega, prime)
 
   for ind = 1 : n/2
     % Add prime to ensure positive modulo
-    y(ind)       = rem(rem(y_even(ind) + x*y_odd(ind) + prime, prime) + prime, prime);
-    y(ind + n/2) = rem(rem(y_even(ind) - x*y_odd(ind) + prime, prime) + prime, prime);
+    y(ind)           = rem(y_even(ind) + x*y_odd(ind) + prime, prime);
+    y(ind + n/2) = rem(y_even(ind) - x*y_odd(ind) + prime, prime);
     x = rem(x * omega, prime);
   endfor
 end
