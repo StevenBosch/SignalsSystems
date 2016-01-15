@@ -3,6 +3,6 @@ function[ans] = NTT1(x)
   [root, prime] = rootsofunity(N)
   k = (prime-1)/ N;
   
-  vdm = rem(VDMprime(root^k, N, prime), prime);
+  vdm = VDMprime(root^k, N, prime);
   ans = rem((vdm * x'), prime)'
 end
