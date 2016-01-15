@@ -4,6 +4,6 @@ function[ans] = NTTinv1(x)
   k = (prime-1)/ N;
   rootInv = modinverse(root, prime)
   
-  vdm = rem(VDMprime(rootInv^k, N, prime), prime);
+  vdm = VDMprime(rootInv^k, N, prime);
   ans = rem(modinverse(N, prime) * vdm * x', prime)';
 end
