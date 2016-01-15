@@ -1,7 +1,7 @@
-function[y] = runNNT(a)
+function[y] = runNTT2(a)
   N = length(a);
   [root, prime] = rootsofunity(N)
   k = (prime-1)/ N
   omega = rem(root^k, prime)
-  y = myNNT(a, omega, prime);
+  y = NTT2(a, omega, prime);
 end
