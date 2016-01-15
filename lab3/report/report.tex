@@ -47,7 +47,6 @@
     showtabs=false,
     tabsize=2
 }
-
 \lstset{style=mystyle, language=Matlab}
 \renewcommand{\thesubsection}{\small(\alph{subsection})}
 
@@ -59,7 +58,7 @@
 \maketitle
 
 \section{Convolution using FFTs}
-Listing \ref{myconv} gives our implementation of the convolution function using FFTs. To get the convolution of two signals using FFTs, we first pad both signals with the length of the other signal. After that we calculate the Fourier transform of both of the signals and multiply them. Finally we calculate the inverse Fourier transform of the acquired result and output its real part.
+Listing~\ref{myconv} gives our implementation of the convolution function using FFTs. To get the convolution of two signals using FFTs, we first pad both signals with the length of the other signal. After that we calculate the Fourier transform of both of the signals and multiply them. Finally we calculate the inverse Fourier transform of the acquired result and output its real part.
 
 The following examples show that our implementation yields the same results as the built in convolution function of Octave:
 \begin{lstlisting}
@@ -76,9 +75,9 @@ ans = 0  -1   0   2   0  -1   0
 \end{lstlisting}
 
  \lstinputlisting[caption={My convolution},label={myconv}]{../code/myconv.m}
- 
+
 \section{Discrete Fourier Transform}
-Listings \ref{VDM}, \ref{myDFT} and \ref{myInvDFT} give our implementations of the Discrete Fourier Transform using the Vandermonde matrix, and its inverse. In $VDM.m$ the Van der Monde matrix is constructed, given an omega and a length of the signal N. Every element in the matrix holds the given omega to the power of the row index times the column index. In $myDFT.m$ the omega is calculated as $e^{2\pi i/N}$, with $N$ being the length of the signal $x$. It then calls on $VDM.m$ with this omega and length, and multiplies its result with the given signal $x$. The function $myInvDFT.m$ does almost the same thing, with the difference of omega being calculated as $e^{-2\pi i/N}$ and the final answer begin multiplied by $1/N$.
+Listings~\ref{VDM},~\ref{myDFT} and~\ref{myInvDFT} give our implementations of the Discrete Fourier Transform using the Vandermonde matrix, and its inverse. In $VDM.m$ the Van der Monde matrix is constructed, given an omega and a length of the signal N. Every element in the matrix holds the given omega to the power of the row index times the column index. In $myDFT.m$ the omega is calculated as $e^{2\pi i/N}$, with $N$ being the length of the signal $x$. It then calls on $VDM.m$ with this omega and length, and multiplies its result with the given signal $x$. The function $myInvDFT.m$ does almost the same thing, with the difference of omega being calculated as $e^{-2\pi i/N}$ and the final answer begin multiplied by $1/N$.
 
 The following listing shows a comparison of these functions with the Octave functions $fft$ and $ifft$ ($myDFT$ gives $-0i$ instead of $+0i$, but this is of course equal):
 
@@ -111,16 +110,28 @@ ans = 0.00000 + 0.00000i   0.00000 + 0.50000i   0.00000 + 0.00000i    0.00000 - 
  \lstinputlisting[caption={Van der Monde},label={VDM}]{../code/VDM.m}
  \lstinputlisting[caption={Discrete Fourier Transform},label={myDFT}]{../code/myDFT.m}
  \lstinputlisting[caption={Inverse Discrete Fourier Transform},label={myInvDFT}]{../code/myInvDFT.m}
- 
-\section{Number Theoretic Transform (following DFT)}
-Listings \ref{VDMprime}, \ref{NTT1} and \ref{NTTinv1} give our implementations of the Vandermonde matrix modulo a given prime, the Number Theoretic Transform and its inverse using the DFT steps. In $VDMprime.m$ the same is done as in $VDM.m$, except that every step of multiplication in the powers of the elements needs to be done module the given prime, because else the power will get too great for longer signals. Therefore this algorithm calculates every element of the matrix separately instead of per row like $VDM.m$ does. 
 
-$NTT1.m$ then does almost the same as $myDFT.m$. It uses a different omega, namely $omega = root^k$, where root is the primitive root of unity, calculated with the given function $rootsofunity.m$, and $k = (prime - 1)/N$. Finally it gives the product of the Vandermonde matrix and the signal x, modulo the prime. $NTTinv1.m$ does the same, except that it uses the modinverse of the root as omega, and it multiples the product of the Vandermonde matrix and the signals by the modinverse of N. 
+\section{Number Theoretic Transform (following DFT)}
+Listings~\ref{VDMprime},~\ref{NTT1} and~\ref{NTTinv1} give our implementations of
+an adjusted Vandermonde matrix with the modulo of a given prime,
+the Number Theoretic Transform and its inverse using the DFT steps.
+In $VDMprime.m$ the same is done as in $VDM.m$,
+except that after every multiplication a modulo has to be performed
+in order to prevent the power's value to exceed the computational limits
+Therefore this algorithm calculates every element of the matrix separately instead of per row like $VDM.m$ does.
+
+$NTT1.m$ is very similar to $myDFT.m$.
+ It also uses an omega, namely $omega = root^k$,
+ where root is the primitive root of unity,
+ calculated with the given function $rootsofunity.m$, and $k = (prime - 1)/N$.
+ Finally it gives the product of the adjusted Vandermonde matrix and the signal x, modulo the prime.
+ $NTTinv1.m$ does the same, except that it uses the modinverse of the root as omega,
+and it multiplies the product of the Vandermonde matrix and the signals by the modinverse of N.
 
  \lstinputlisting[caption={Vandermonde matrix modulo prime},label={VDMprime}]{../code/VDMprime.m}
  \lstinputlisting[caption={NTT following the DFT algorithm},label={NTT1}]{../code/NTT1.m}
  \lstinputlisting[caption={Inverse NTT following the DFT algorithm},label={NTTinv1}]{../code/NTTinv1.m}
- 
+
 \section{Fast Fourier Transform}
  \lstinputlisting[caption={FFT recursive function},label={myFFT}]{../code/myFFT.m}
  \lstinputlisting[caption={Run FFT},label={runFFT}]{../code/runFFT.m}
@@ -129,5 +140,5 @@ $NTT1.m$ then does almost the same as $myDFT.m$. It uses a different omega, name
 \section{Number Theoretic Transform (following FFT)}
 
 \section{Convolution using NTTs}
- 
+
 \end{document}
