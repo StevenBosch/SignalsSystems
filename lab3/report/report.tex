@@ -74,6 +74,7 @@ ans = 0.00000  -1.00000  -0.00000   2.00000   0.00000  -1.00000  -0.00000
 >>> conv([0 1 0 -1], [-1 0 1 0])
 ans = 0  -1   0   2   0  -1   0
 \end{lstlisting}
+The results are equal, indicating that our implementation is correct. 
 
  \lstinputlisting[caption={My convolution},label={myconv}]{../code/myconv.m}
  
@@ -107,6 +108,7 @@ ans = 0.00000 - 0.00000i   0.00000 + 0.50000i   0.00000 - 0.00000i   -0.00000 - 
 >>> ifft([0 1 0 -1])
 ans = 0.00000 + 0.00000i   0.00000 + 0.50000i   0.00000 + 0.00000i    0.00000 - 0.50000i
 \end{lstlisting}
+These examples show that the functions yield the same results.
 
  \lstinputlisting[caption={Van der Monde},label={VDM}]{../code/VDM.m}
  \lstinputlisting[caption={Discrete Fourier Transform},label={myDFT}]{../code/myDFT.m}
@@ -115,18 +117,52 @@ ans = 0.00000 + 0.00000i   0.00000 + 0.50000i   0.00000 + 0.00000i    0.00000 - 
 \section{Number Theoretic Transform (following DFT)}
 Listings \ref{VDMprime}, \ref{NTT1} and \ref{NTTinv1} give our implementations of the Vandermonde matrix modulo a given prime, the Number Theoretic Transform and its inverse using the DFT steps. In $VDMprime.m$ the same is done as in $VDM.m$, except that every step of multiplication in the powers of the elements needs to be done module the given prime, because else the power will get too great for longer signals. Therefore this algorithm calculates every element of the matrix separately instead of per row like $VDM.m$ does. 
 
-$NTT1.m$ then does almost the same as $myDFT.m$. It uses a different omega, namely $omega = root^k$, where root is the primitive root of unity, calculated with the given function $rootsofunity.m$, and $k = (prime - 1)/N$. Finally it gives the product of the Vandermonde matrix and the signal x, modulo the prime. $NTTinv1.m$ does the same, except that it uses the modinverse of the root as omega, and it multiples the product of the Vandermonde matrix and the signals by the modinverse of N. 
+$NTT1.m$ then does almost the same as $myDFT.m$. It uses a different omega, namely $omega = root^k$, where root is the primitive root of unity, calculated with the given function $rootsofunity.m$, and $k = (prime - 1)/N$. Finally it gives the product of the Vandermonde matrix and the signal x, modulo the prime. $NTTinv1.m$ does the same, except that it uses the modinverse of the root as omega, and it multiples the product of the Vandermonde matrix and the signals by the modinverse of N.
+
+Since Octave does not have an NTT-function, it is hard to check our implementation. What we can do is check whether using NTT and its inverse on some input yields the input again. This is indeed the case, as we can see in the listing below:
+
+\begin{lstlisting}
+>>> NTTinv1(NTT1(4:-1:1))
+ans = 0   1   2   3
+
+ans = 4   3   2   1
+
+>>> NTTinv1(NTT1([0 1 0 -1]))
+ans = 0  -1   0   1
+
+ans = 0   1   0  -1
+\end{lstlisting}
+
 
  \lstinputlisting[caption={Vandermonde matrix modulo prime},label={VDMprime}]{../code/VDMprime.m}
  \lstinputlisting[caption={NTT following the DFT algorithm},label={NTT1}]{../code/NTT1.m}
  \lstinputlisting[caption={Inverse NTT following the DFT algorithm},label={NTTinv1}]{../code/NTTinv1.m}
  
 \section{Fast Fourier Transform}
+Listings \ref{myFFT}, \ref{runFFT} and \ref{runInvFFT} give our implementations of the Fast Fourier Transform and its inverse. The function $myFFT.m$ is an implementation of the Cooley - Tukey algorithm, as is given in the slides. The `run'-functions create omega, given a signal $a$, and call on $myFFT$ with these parameters. 
+
+The following examples show the output of our FFT and IFFT functions and the Octave functions:
+
+\begin{lstlisting}
+>>> runFFT(1:4)
+ans = 10.0000 +  0.0000i   -2.0000 +  2.0000i   -2.0000 +  0.0000i   -2.0000 -  2.0000i
+
+>>> fft(1:4)
+ans = 10 +  0i   -2 +  2i   -2 +  0i   -2 -  2i
+
+>>> runFFT([0 1 0 -1])
+ans = 0.00000 + 0.00000i   0.00000 - 2.00000i   0.00000 + 0.00000i   -0.00000 + 2.00000i
+
+>>> fft([0 1 0 -1])
+ans = 0 + 0i   0 - 2i   0 + 0i   0 + 2i
+\end{lstlisting}
+
  \lstinputlisting[caption={FFT recursive function},label={myFFT}]{../code/myFFT.m}
  \lstinputlisting[caption={Run FFT},label={runFFT}]{../code/runFFT.m}
  \lstinputlisting[caption={Run inverse FFT},label={runInvFFT}]{../code/runInvFFT.m}
 
 \section{Number Theoretic Transform (following FFT)}
+
 
 \section{Convolution using NTTs}
  
