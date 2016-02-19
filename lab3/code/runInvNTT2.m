@@ -1,9 +1,10 @@
 function[y] = runInvNTT2(a)
   N = length(a);
-  [root, prime] = rootsofunity(N)
+  [root, prime] = rootsofunity(N);
+  prime
   k = (prime-1)/ N;
-  rootInv = modinverse(root, prime)
-  omega = rem(rootInv^k, prime)
+  rootInv = modinverse(root, prime);
+  omega = rem(rootInv^k, prime);
 
   y = rem(NTT2(a, omega, prime) * modinverse(N, prime), prime);
 end

@@ -1,5 +1,5 @@
 function myconv(x, y)
-  % Pad both signals with the length of the other signal  
+  % Pad both signals with the length of the other signal - 1
   m = length(x);
   n = length(y);
   x = [x zeros(1, n-1)];
